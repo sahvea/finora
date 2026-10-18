@@ -1,18 +1,38 @@
 import { fileURLToPath, URL } from 'node:url';
 
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      pwaAssets: { config: true },
+      manifest: {
+        name: 'Finora — траты и бюджет',
+        short_name: 'Finora',
+        description: 'Учёт трат и бюджета для семьи и друзей',
+        lang: 'ru',
+        start_url: '/',
+        scope: '/',
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: '#FDFBF7',
+        theme_color: '#FDFBF7',
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,woff2,svg,png,ico}'],
+        navigateFallbackDenylist: [/^\/__/],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
-  css: {
-    modules: {
-      generateScopedName: '[name]_[local]__[hash:base64:5]',
     },
   },
   build: {

@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/instrument-sans';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border-soft: var(--border-soft);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent-strong: var(--accent-strong);
+
+  --color-groceries: var(--category-groceries);
+  --color-cafe: var(--category-cafe);
+  --color-home: var(--category-home);
+  --color-bills: var(--category-bills);
+  --color-transport: var(--category-transport);
+  --color-health: var(--category-health);
+  --color-study: var(--category-study);
+  --color-leisure: var(--category-leisure);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  --radius: 14px;
+
+  --background: #faf9f9;
+  --card: #ffffff;
+  --foreground: #2e302c;
+  --popover: #ffffff;
+  --popover-foreground: #2e302c;
+  --card-foreground: #2e302c;
+  --primary: #2a7357;
+  --primary-foreground: #ffffff;
+  --secondary: #f2f4f0;
+  --secondary-foreground: #474a44;
+  --muted: #f2f4f0;
+  --muted-foreground: #6a6e67;
+  --accent: #e9f1ec;
+  --accent-foreground: #235f49;
+  --destructive: #8a4a4a;
+  --border: #e5e7e2;
+  --input: #e5e7e2;
+  --ring: #2a7357;
+
+  --surface-soft: #f2f4f0;
+  --surface-sunken: #f6f7f4;
+  --border-soft: #f0f1ed;
+  --ink-subtle: #767a72;
+  --ink-faint: #a9ada5;
+  --accent-strong: #c3d9cd;
+
+  --grain-opacity: 0.05;
+}
+
+.dark {
+  --background: #1c1a16;
+  --foreground: #f2ede4;
+  --card: #262320;
+  --card-foreground: #f2ede4;
+  --popover: #262320;
+  --popover-foreground: #f2ede4;
+  --primary: #7fc9ac;
+  --primary-foreground: #10342a;
+  --secondary: #302c27;
+  --secondary-foreground: #e6e0d6;
+  --muted: #302c27;
+  --muted-foreground: #a9a194;
+  --accent: #27433a;
+  --accent-foreground: #b9e3d1;
+  --destructive: #d08b8b;
+  --border: #38332d;
+  --input: #38332d;
+  --ring: #4f9d82;
+
+  --surface-soft: #302c27;
+  --surface-sunken: #221f1b;
+  --border-soft: #2e2a25;
+  --ink-subtle: #a9a194;
+  --ink-faint: #7a7367;
+  --accent-strong: #4f9d82;
+
+  --grain-opacity: 0.04;
+}
+
+@utility pt-safe {
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+
+@utility pb-safe {
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+@utility px-safe {
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('/noise.svg');
+    opacity: var(--grain-opacity);
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+  }
+}
